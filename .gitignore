@@ -1,0 +1,17 @@
+#Terraform files
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+
+# Local override files
+terraform.rc
+override.tf
+override.tf.json
+
+# IDE/Editor files
+.idea/
+.vscode/
+*.swp
+EOF
