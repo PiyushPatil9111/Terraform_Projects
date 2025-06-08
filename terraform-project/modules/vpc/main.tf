@@ -114,5 +114,29 @@ resource "aws_route_table" "private" {
   tags   = merge(var.tags, { Name = "${var.env}-private-rt" })
 }
 
+resource "aws_route_table_association" "private_assoc" {
+  count          = length(var.private_subnet_cidrs)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route" "private_nat_access" {
+  count                   = length(var.private_subnet_cidrs)
+  route_table_id          = aws_route_table.private.id
+  destination_cidr_block  = "0.0.0.0/0"
+  network_interface_id    = aws_instance.nat.id 
+}
+
+output "vpc_id" {
+  value = aws_vpc.main.id
+}
+
+output "public_subnet_ids" {
+  value = aws_subnet.public[*].id
+}
+
+output "private_subnet_ids" {
+  value = aws_subnet.private[*].id
+}
 
 
