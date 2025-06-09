@@ -1,3 +1,6 @@
+variable "env" {
+  type = string
+}
 variable "name" {
   type = string
 }
@@ -15,8 +18,5 @@ variable "internal" {
 }
 variable "public_subnet_ids" {
   type = list(string)
-}
-variable "vpc_id" {
-  type = string
 }
 
