@@ -18,6 +18,7 @@ module "alb" {
   security_groups     = var.security_groups
   name                = var.name
   vpc_id              = module.vpc.vpc_id
+  public_subnet_ids   = module.vpc.public_subnet_ids
   internal            = var.internal
   tags                = var.tags
 }

@@ -2,7 +2,7 @@ resource "aws_lb" "app_lb" {
   name               = var.name
   internal           = var.internal
   load_balancer_type = "application"
-  subnets            = module.vpc.public_subnet_ids
+  subnets            = var.public_subnet_ids
   security_groups    = var.security_groups
 
   tags = var.tags
@@ -12,7 +12,7 @@ resource "aws_lb_target_group" "app_target_group" {
   name     = "${var.name}-target-group"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = module.vpc.vpc_id
+  vpc_id   = var.vpc_id
   tags     = merge(var.tags, { Name = "${var.name}-target-group" })
   health_check {
     path = "/"
