@@ -1,5 +1,5 @@
 variable "region" {
-    type = String
+    type = string
     default = "us-east-1"
 }
 

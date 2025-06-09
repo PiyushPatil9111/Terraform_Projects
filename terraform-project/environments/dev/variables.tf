@@ -1,5 +1,5 @@
 variable "region" {
-    type = String
+    type = string
     default = "us-east-1"
 }
 
@@ -31,4 +31,18 @@ variable "env" {
 variable "tags" {
   description = "Tags for all resources fixed"
   type = map(string)
+}
+
+#for ALB
+
+variable "security_groups" {
+  type = list(string)
+}
+
+variable "internal" {
+  type = bool
+}
+
+variable "name" {
+  type = string
 }
