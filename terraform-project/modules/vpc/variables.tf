@@ -3,7 +3,7 @@ variable "region" {
     default = "us-east-1"
 }
 
-variable "cidssr_block" {
+variable "cidr_block" {
     description = "VPC CIDR block"
     type        = string
 }

@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "vpc" {
-    source              = "../modules/vpc"
+    source              = "../../modules/vpc"
     cidr_block          = var.cidr_block
     region              = var.region
     public_subnet_cidrs = var.public_subnet_cidrs
@@ -21,6 +21,7 @@ module "alb" {
   public_subnet_ids   = module.vpc.public_subnet_ids
   internal            = var.internal
   tags                = var.tags
+<<<<<<< HEAD
   env                 = var.env
 }
 
@@ -40,3 +41,6 @@ module "rds" {
   engine = var.engine
   engine_version = var.engine_version
 }
+=======
+}
+>>>>>>> 897202a (resolving conflict)

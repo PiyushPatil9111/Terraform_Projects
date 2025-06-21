@@ -1,4 +1,4 @@
-resource "vpc" "main" {
+resource "aws_vpc" "main" {
     cidr_block           = var.cidr_block
     enable_dns_support   = true
     enable_dns_hostnames = true
@@ -6,13 +6,13 @@ resource "vpc" "main" {
 }
 
 resource "aws_internet_gateway" "gw" {
-    vpc_id = vpc.main.id
+    vpc_id = aws_vpc.main.id
     tags   = merge(var.tags, { Name = "${var.env}-igw" })
 }
 
 resource "aws_subnet" "public" {
     count = length(var.public_subnet_cidrs)
-    vpc_id = vpc.main.id
+    vpc_id = aws_vpc.main.id
     cidr_block        = var.public_subnet_cidrs[count.index]
     availability_zone = var.azs[count.index % length(var.azs)]
     map_public_ip_on_launch = true
@@ -21,7 +21,7 @@ resource "aws_subnet" "public" {
 
 resource "aws_subnet" "private" {
     count = length(var.private_subnet_cidrs)
-    vpc_id = vpc.main.id
+    vpc_id = aws_vpc.main.id
     cidr_block        = var.private_subnet_cidrs[count.index]
     availability_zone = var.azs[count.index % length(var.azs)]
     map_public_ip_on_launch = true
@@ -126,17 +126,3 @@ resource "aws_route" "private_nat_access" {
   destination_cidr_block  = "0.0.0.0/0"
   network_interface_id    = aws_instance.nat.id 
 }
-
-output "vpc_id" {
-  value = aws_vpc.main.id
-}
-
-output "public_subnet_ids" {
-  value = aws_subnet.public[*].id
-}
-
-output "private_subnet_ids" {
-  value = aws_subnet.private[*].id
-}
-
-
