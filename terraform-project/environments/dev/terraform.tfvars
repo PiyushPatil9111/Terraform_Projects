@@ -10,4 +10,15 @@ tags = {
 #ALB
 security_groups = ["dev-alb-SG"]
 internal = false
-name = "dev-public-alb"
+alb_name = "dev-public-alb"
+
+#RDS
+rds_name = "dev-private-rds"
+rds_port = "3306"
+rds_username = "rds_user"
+rds_password = "rds@12345"
+max_allocated_storage = 35
+allocated_storage = 20
+instance_class = "db.t3.micro"
+engine = "mysql"
+engine_version = "8.0.36"

@@ -43,6 +43,36 @@ variable "internal" {
   type = bool
 }
 
-variable "name" {
+variable "alb_name" {
+  type = string
+}
+
+#for RDS
+
+variable "rds_name" {
+  type = string
+}
+variable "rds_port" {
+  type = number
+}
+variable "rds_password" {
+  type = string
+}
+variable "rds_username" {
+  type = string
+}
+variable "max_allocated_storage" {
+  type = number
+}
+variable "allocated_storage" {
+  type = number
+}
+variable "instance_class" {
+  type = string
+}
+variable "engine_version" {
+  type = string
+}
+variable "engine" {
   type = string
 }
