@@ -46,8 +46,6 @@ variable "internal" {
 variable "alb_name" {
   type = string
 }
-<<<<<<< HEAD
-
 #for RDS
 
 variable "rds_name" {
@@ -77,5 +75,3 @@ variable "engine_version" {
 variable "engine" {
   type = string
 }
-=======
->>>>>>> 897202a (resolving conflict)
