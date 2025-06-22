@@ -11,7 +11,7 @@ variable "tags" {
   type = map(string)
 }
 variable "private_subnet_ids" {
-  type = string
+  type = list(string)
 }
 variable "engine" {
   type = string

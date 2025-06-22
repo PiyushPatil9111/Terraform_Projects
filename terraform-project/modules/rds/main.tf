@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "dev_rds_subnet_gp" {
   name       = "${var.rds_name}-subnet-group"
-  subnet_ids = var.private_subnet_ids[0]
+  subnet_ids = var.private_subnet_ids
 
   tags = {
     Name = "${var.rds_name}-subnet-group"
@@ -10,7 +10,7 @@ resource "aws_db_subnet_group" "dev_rds_subnet_gp" {
 resource "aws_security_group" "dev_rds_sg" {
   name        = "nat-instance-sg"
   description = "Allow HTTP/HTTPS and SSH for NAT instance"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
 	ingress {
 		from_port   = 22
@@ -54,7 +54,7 @@ resource "aws_db_instance" "my_db" {
   username                = var.rds_username
   password                = var.rds_password
   port                    = var.rds_port
-  vpc_security_group_ids  = aws_security_group.dev_rds_sg.id
+  vpc_security_group_ids  = [aws_security_group.dev_rds_sg.id]
   db_subnet_group_name    = aws_db_subnet_group.dev_rds_subnet_gp.name
   skip_final_snapshot     = true
   publicly_accessible     = var.publicly_accessible
